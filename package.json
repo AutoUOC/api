@@ -1,0 +1,19 @@
+{
+  "name": "autouoc-api",
+  "version": "1.0.0",
+  "description": "API wrapper for AutoUOC",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BreMea/autouoc-api.git"
+  },
+  "author": "bremea",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BreMea/autouoc-api/issues"
+  },
+  "homepage": "https://github.com/BreMea/autouoc-api#readme"
+}
