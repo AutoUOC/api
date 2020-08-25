@@ -1,4 +1,4 @@
-// Posts a forum post to a topic
+// Edits an existing forum post
 const https = require('https');
 const fs = require('fs');
 const path = require('path');
@@ -8,9 +8,11 @@ const cookieAuth = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../auth/c
 
 // Export method
 module.exports = {
-    post(topicID, body) {
+    post(topicID, postID, body) {
         // Set request content
-        let content = 'csrfmiddlewaretoken=' + cookieAuth.forums.csrfmiddleware + '&body=' + body + '&AddPostForm=';
+        let content = 'csrfmiddlewaretoken=' + cookieAuth.forums.csrfmiddleware + '&body=' + body;
+
+        console.log(content);
 
         // Configure headers
         let head = {
