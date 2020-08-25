@@ -69,7 +69,7 @@ module.exports = {
         req.write(content);
         req.end();
     },
-    edit(topicID, postID, body) {
+    edit(postID, body) {
         // Set request content
         let content = 'csrfmiddlewaretoken=' + cookieAuth.forums.csrfmiddleware + '&body=' + body;
 
@@ -77,7 +77,7 @@ module.exports = {
         let head = {
             'Authorization': cookieAuth.forums.auth,
             'Host': 'scratch.mit.edu',
-            'Referer': 'https://scratch.mit.edu/discuss/topic/' + topicID,
+            'Referer': 'https://scratch.mit.edu/discuss/post/' + postID,
             'Connection': 'keep-alive',
             'Origin': 'https://scratch.mit.edu',
             'Content-Length': content.length,
@@ -95,12 +95,11 @@ module.exports = {
         let options = {
             method: 'POST',
             host: 'scratch.mit.edu',
-            path: '/discuss/topic/' + topicID + '/?#reply',
+            path: '/discuss/post/' + postID + '/edit',
             headers: head
         };
 
         // Prepare POST data
-        var req = https.request(options, (res) => {
             if (res.statusCode === 403) {
                 return {
                     'code': res.statusCode,
