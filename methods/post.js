@@ -23,15 +23,15 @@ module.exports = {
             'Accept-Language': 'en-US,en;q=0.5',
             'Accept': 'text/html, */*; q=0.01',
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:79.0) Gecko/20100101 Firefox/79.0',
-            'X-CSRFToken': cookieAuth.comments.csrfToken,
-            'Cookie': cookieAuth.comments.cookieToken
+            'X-CSRFToken': cookieAuth.forums.csrfToken,
+            'Cookie': cookieAuth.forums.cookieToken
         };
 
         // Configure HTTP options
         let options = {
             method: 'POST',
             host: 'scratch.mit.edu',
-            path: '/discuss/topic/' + user + '/?#reply',
+            path: '/discuss/topic/' + topicId + '/?#reply',
             headers: head
         };
 
