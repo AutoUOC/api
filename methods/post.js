@@ -8,7 +8,7 @@ const cookieAuth = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../auth/c
 
 // Export method
 module.exports = {
-    comment(topic, body) {
+    post(topic, body) {
         // Set request content
         let content = 'csrfmiddlewaretoken=' + cookieAuth.forums.csrfToken + '&body=' + body + '&AddPostForm=';
 
