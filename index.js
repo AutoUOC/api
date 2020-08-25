@@ -1,8 +1,10 @@
 module.exports = {
-    // Posting Comments
-    comment: require('./methods/comment.js'),
+    // Comment methods
+    comments: require('./methods/comment.js'),
     
-    // Forum Activity
-    post: require('./methods/post.js'),
-    edit: require('./methods/edit.js')
+    // Forum methods
+    forums: require('./methods/forums.js'),
+
+    // Messages methods
+    messages: require('./methods/messages.js')
 }

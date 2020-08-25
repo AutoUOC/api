@@ -8,7 +8,7 @@ const cookieAuth = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../auth/c
 
 // Export method
 module.exports = {
-    comment(user, body) {
+    post(user, body) {
         // Set request content
         let content = JSON.stringify({
             'content': body,
@@ -28,8 +28,8 @@ module.exports = {
             'Accept-Language': 'en-US,en;q=0.5',
             'Accept': 'text/html, */*; q=0.01',
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:79.0) Gecko/20100101 Firefox/79.0',
-            'X-CSRFToken': cookieAuth.comments.csrfToken,
-            'Cookie': cookieAuth.comments.cookieToken
+            'X-CSRFToken': 'a',
+            'Cookie': cookieAuth.cookie
         };
 
         // Configure HTTP options
@@ -40,17 +40,23 @@ module.exports = {
             headers: head
         };
 
+        // Send HTTPS request
         var req = https.request(options, (res) => {
-            console.log(options.headers);
-            res.on('data', (d) => {
-                process.stdout.write(d);
-            });
+            if (res.statusCode === 302 || res.statusCode === 200) {
+                console.log('Comment has been posted to ' + user);
+            } else if (res.statusCode === 403) {
+                console.log('Failed to post comment: Invalid auth');
+            } else if (res.statusCode === 500) {
+                console.log('Failed to post comment: Scratch is having server issues');
+            }
         });
-          
+        
+        // Handle Errors
         req.on('error', (e) => {
-            console.error(e);
+            console.error('API Error: ' + e);
         });
-          
+        
+        // Send content and end request
         req.write(content);
         req.end();
     }
