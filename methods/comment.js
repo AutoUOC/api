@@ -28,7 +28,7 @@ module.exports = {
             'Accept-Language': 'en-US,en;q=0.5',
             'Accept': 'text/html, */*; q=0.01',
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:79.0) Gecko/20100101 Firefox/79.0',
-            'X-CSRFToken': cookieAuth.comments.csrfToken,
+            'X-CSRFToken': 'a',
             'Cookie': cookieAuth.cookie
         };
 
