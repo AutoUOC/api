@@ -12,5 +12,8 @@
   "bugs": {
     "url": "https://github.com/BreMea/autouoc-api/issues"
   },
-  "homepage": "https://github.com/BreMea/autouoc-api#readme"
+  "homepage": "https://github.com/BreMea/autouoc-api#readme",
+  "dependencies": {
+    "http": "0.0.1-security"
+  }
 }
