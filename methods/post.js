@@ -31,7 +31,7 @@ module.exports = {
         let options = {
             method: 'POST',
             host: 'scratch.mit.edu',
-            path: '/discuss/topic/' + user + '/?#reply',
+            path: '/discuss/topic/' + topicId + '/?#reply',
             headers: head
         };
 
