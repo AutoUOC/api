@@ -16,6 +16,7 @@ module.exports = {
         let head = {
             'Referer': 'https://scratch.mit.edu/discuss/topic/' + topic,
             'Connection': 'keep-alive',
+            'Authorization': cookieAuth.forums.auth,
             'Origin': 'https://scratch.mit.edu',
             'Content-Length': content.length,
             'X-Requested-With': 'XMLHttpRequest',
@@ -32,12 +33,13 @@ module.exports = {
         let options = {
             method: 'POST',
             host: 'scratch.mit.edu',
-            path: '/discuss/topic/' + user + '/?#reply',
+            path: '/discuss/topic/' + topic + '/?#reply',
             headers: head
         };
 
         // Send HTTPS request
         var req = https.request(options, (res) => {
+            console.log(res.statusCode);
             res.on('data', (d) => {
                 process.stdout.write(d);
             });
