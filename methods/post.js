@@ -9,7 +9,7 @@ const cookieAuth = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../auth/c
 module.exports = {
     post(topicId, body) {
         // Set request content
-        let content = 'csrfmiddlewaretoken=' + cookieAuth.forums.csrfToken + '&body=' + body + '&AddPostForm=';
+        let content = 'csrfmiddlewaretoken=' + cookieAuth.forums.csrfmiddleware + '&body=' + body + '&AddPostForm=';
 
         // Configure headers
         let head = {
@@ -23,8 +23,8 @@ module.exports = {
             'Accept-Language': 'en-US,en;q=0.5',
             'Accept': 'text/html, */*; q=0.01',
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:79.0) Gecko/20100101 Firefox/79.0',
-            'X-CSRFToken': cookieAuth.forums.csrfToken,
-            'Cookie': cookieAuth.forums.cookieToken
+            'X-CSRFToken': cookieAuth.forums.csrfmiddleware,
+            'Cookie': cookieAuth.cookie
         };
 
         // Configure HTTP options
