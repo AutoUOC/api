@@ -9,53 +9,39 @@ const cookieAuth = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../auth/c
 // Export method
 module.exports = {
     count(user) {
-        // Set request content
-        let content = JSON.stringify({
-            'content': body,
-            'parent_id': '',
-            'commentee_id': ''
-        });
-
-        // Configure headers
-        let head = {
-            'Connection': 'keep-alive',
-            'Content-Length': content.length,
-            'X-Requested-With': 'XMLHttpRequest',
-            'Content-Type': 'application/json',
-            'Accept-Encoding': 'gzip, deflate, br',
-            'Accept-Language': 'en-US,en;q=0.5',
-            'Accept': 'text/html, */*; q=0.01',
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:79.0) Gecko/20100101 Firefox/79.0',
-            'X-CSRFToken': 'a',
-            'Cookie': cookieAuth.cookie
-        };
-
-        // Configure HTTP options
-        let options = {
-            method: 'POST',
-            host: 'api.scratch.mit.edu',
-            path: '/users/' + AutoUOC + '/messages/count/',
-            headers: head
-        };
-
         // Send HTTPS request
-        var req = https.request(options, (res) => {
-            if (res.statusCode === 302 || res.statusCode === 200) {
-                console.log('Message count: ' + res.count);
-            } else if (res.statusCode === 403) {
-                console.log('Failed to get message count: Invalid auth');
-            } else if (res.statusCode === 500) {
-                console.log('Failed to get message count: Scratch is having server issues');
-            }
-        });
-        
-        // Handle Errors
-        req.on('error', (e) => {
+        https.get('https://api.scratch.mit.edu/users/' + user + '/messages/count/', (res) => {
+            let body = '';
+
+            res.on("data", (chunk) => {
+                body += chunk;
+            });
+
+            res.on("end", () => {
+                if (res.statusCode === 403) {
+                    return {
+                        'code': res.statusCode,
+                        'msg': 'Invalid auth',
+                        'data': 'none'
+                    };
+                } else if (res.statusCode === 500) {
+                    return {
+                        'code': res.statusCode,
+                        'msg': 'Server issues',
+                        'data': 'none'
+                    };
+                } else {
+                    return {
+                        'code': res.statusCode,
+                        'msg': 'Got msg count',
+                        'data': JSON.parse(body).count
+                    };
+                }
+            });
+            // Handle Errors
+        }).on('error', (e) => {
             console.error('API Error: ' + e);
         });
-        
-        // Send content and end request
-        req.write(content);
-        req.end();
+
     }
 }

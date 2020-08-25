@@ -39,12 +39,24 @@ module.exports = {
 
         // Prepare POST data
         var req = https.request(options, (res) => {
-            if (res.statusCode === 302 || res.statusCode === 200) {
-                console.log('Forum post has been posted to topic ' + topicID);
-            } else if (res.statusCode === 403) {
-                console.log('Failed to post forum post: Invalid auth');
+            if (res.statusCode === 403) {
+                return {
+                    'code': res.statusCode,
+                    'error-msg': 'Invalid auth',
+                    'data': 'none'
+                };
             } else if (res.statusCode === 500) {
-                console.log('Failed to post forum post: Scratch is having server issues');
+                return {
+                    'code': res.statusCode,
+                    'error-msg': 'Server issues',
+                    'data': 'none'
+                };
+            } else {
+                return {
+                    'code': res.statusCode,
+                    'msg': 'Posted to topic ' + topicID,
+                    'data': 'none'
+                };
             }
         });
         
@@ -88,13 +100,24 @@ module.exports = {
         };
 
         // Prepare POST data
-        var req = https.request(options, (res) => {
-            if (res.statusCode === 302 || res.statusCode === 200) {
-                console.log('Forum post ' + postID + ' has been edited in topic ' + topicID);
-            } else if (res.statusCode === 403) {
-                console.log('Failed to edit forum post: Invalid auth');
+            if (res.statusCode === 403) {
+                return {
+                    'code': res.statusCode,
+                    'error-msg': 'Invalid auth',
+                    'data': 'none'
+                };
             } else if (res.statusCode === 500) {
-                console.log('Failed to edit forum post: Scratch is having server issues');
+                return {
+                    'code': res.statusCode,
+                    'error-msg': 'Server issues',
+                    'data': 'none'
+                };
+            } else {
+                return {
+                    'code': res.statusCode,
+                    'msg': 'Edited post ' + postID,
+                    'data': 'none'
+                };
             }
         });
         
