@@ -1,4 +1,4 @@
-// Post comments to user profiles
+// Posts a forum post to a topic
 const https = require('https');
 const fs = require('fs');
 const path = require('path');
@@ -8,35 +8,31 @@ const cookieAuth = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../auth/c
 
 // Export method
 module.exports = {
-    comment(user, body) {
+    comment(topic, body) {
         // Set request content
-        let content = JSON.stringify({
-            'content': body,
-            'parent_id': '',
-            'commentee_id': ''
-        });
+        let content = 'csrfmiddlewaretoken=' + cookieAuth.forums.csrfToken + '&body=' + body + '&AddPostForm=';
 
         // Configure headers
         let head = {
-            'Referer': 'https://scratch.mit.edu/users/' + user,
+            'Referer': 'https://scratch.mit.edu/discuss/topic/' + topic,
             'Connection': 'keep-alive',
             'Origin': 'https://scratch.mit.edu',
             'Content-Length': content.length,
             'X-Requested-With': 'XMLHttpRequest',
-            'Content-Type': 'application/json',
+            'Content-Type': 'multipart/form-data; boundary=---------------------------53803459825946508421916781648',
             'Accept-Encoding': 'gzip, deflate, br',
             'Accept-Language': 'en-US,en;q=0.5',
-            'Accept': 'text/html, */*; q=0.01',
+            'Accept': 'ttext/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:79.0) Gecko/20100101 Firefox/79.0',
-            'X-CSRFToken': cookieAuth.comments.csrfToken,
-            'Cookie': cookieAuth.cookie
+            'Cookie': cookieAuth.cookie,
+            'Upgrade-Insecure-Requests': '1'
         };
 
         // Configure HTTP options
         let options = {
             method: 'POST',
             host: 'scratch.mit.edu',
-            path: '/site-api/comments/user/' + user + '/add/',
+            path: '/discuss/topic/' + user + '/?#reply',
             headers: head
         };
 
