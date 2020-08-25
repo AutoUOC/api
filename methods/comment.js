@@ -8,7 +8,7 @@ const cookieAuth = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../auth/c
 
 // Export method
 module.exports = {
-    comment(user, body) {
+    post(user, body) {
         // Set request content
         let content = JSON.stringify({
             'content': body,
