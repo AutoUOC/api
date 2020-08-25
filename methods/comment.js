@@ -40,17 +40,19 @@ module.exports = {
             headers: head
         };
 
+        // Send HTTPS request
         var req = https.request(options, (res) => {
-            console.log(options.headers);
             res.on('data', (d) => {
                 process.stdout.write(d);
             });
         });
-          
+        
+        // Handle Errors
         req.on('error', (e) => {
-            console.error(e);
+            console.error('API Error: ' + e);
         });
-          
+        
+        // Send content and end request
         req.write(content);
         req.end();
     }
