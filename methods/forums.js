@@ -95,12 +95,11 @@ module.exports = {
         let options = {
             method: 'POST',
             host: 'scratch.mit.edu',
-            path: '/discuss/topic/' + topicID + '/?#reply',
+            path: '/discuss/topic/' + topicID + '/post/' + postID + '/edit',
             headers: head
         };
 
         // Prepare POST data
-        var req = https.request(options, (res) => {
             if (res.statusCode === 403) {
                 return {
                     'code': res.statusCode,
