@@ -12,8 +12,6 @@ module.exports = {
         // Set request content
         let content = 'csrfmiddlewaretoken=' + cookieAuth.forums.csrfmiddleware + '&body=' + body;
 
-        console.log(content);
-
         // Configure headers
         let head = {
             'Authorization': cookieAuth.forums.auth,
