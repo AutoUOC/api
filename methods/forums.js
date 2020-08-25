@@ -83,18 +83,18 @@ module.exports = {
         let options = {
             method: 'POST',
             host: 'scratch.mit.edu',
-            path: '/discuss/topic/' + topicID + '/?#reply',
+            path: '/discuss/topic/' + topicID + '/post/' + postID + '/edit',
             headers: head
         };
 
         // Prepare POST data
         var req = https.request(options, (res) => {
             if (res.statusCode === 302 || res.statusCode === 200) {
-                console.log('Forum post has been posted to topic ' + topicID);
+                console.log('Forum post ' + postID + ' has been edited in topic ' + topicID);
             } else if (res.statusCode === 403) {
-                console.log('Failed to post forum post: Invalid auth');
+                console.log('Failed to edit forum post: Invalid auth');
             } else if (res.statusCode === 500) {
-                console.log('Failed to post forum post: Scratch is having server issues');
+                console.log('Failed to edit forum post: Scratch is having server issues');
             }
         });
         
