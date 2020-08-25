@@ -42,6 +42,7 @@ module.exports = {
 
         // Send HTTPS request
         var req = https.request(options, (res) => {
+            console.log(res.statusCode);
             res.on('data', (d) => {
                 process.stdout.write(d);
             });
