@@ -18,11 +18,24 @@ module.exports = {
             });
 
             res.on("end", () => {
-                console.log('Message count: ' + JSON.parse(body).count.toString());
                 if (res.statusCode === 403) {
-                    console.log('Failed to get message count: Invalid auth');
+                    return {
+                        'code': res.statusCode,
+                        'msg': 'Invalid auth',
+                        'data': 'none'
+                    };
                 } else if (res.statusCode === 500) {
-                    console.log('Failed to get message count: Scratch is having server issues');
+                    return {
+                        'code': res.statusCode,
+                        'msg': 'Server issues',
+                        'data': 'none'
+                    };
+                } else {
+                    return {
+                        'code': res.statusCode,
+                        'msg': 'Got msg count',
+                        'data': JSON.parse(body).count
+                    };
                 }
             });
             // Handle Errors
