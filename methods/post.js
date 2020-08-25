@@ -40,8 +40,15 @@ module.exports = {
             headers: head
         };
 
+        // Prepare POST data
         var req = https.request(options, (res) => {
-            console.log(res.statusCode);
+            if (res.statusCode === 302 || res.statusCode === 200) {
+                console.log('Forum post has been posted to topic ' + topicID);
+            } else if (res.statusCode === 403) {
+                console.log('Failed to post forum post: Invalid auth');
+            } else if (res.statusCode === 500) {
+                console.log('Failed to post forum post: Scratch is having server issues');
+            }
         });
         
         // Handle Errors

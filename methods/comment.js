@@ -42,10 +42,13 @@ module.exports = {
 
         // Send HTTPS request
         var req = https.request(options, (res) => {
-            console.log(res.statusCode);
-            res.on('data', (d) => {
-                process.stdout.write(d);
-            });
+            if (res.statusCode === 302 || res.statusCode === 200) {
+                console.log('Comment has been posted to ' + user);
+            } else if (res.statusCode === 403) {
+                console.log('Failed to post comment: Invalid auth');
+            } else if (res.statusCode === 500) {
+                console.log('Failed to post comment: Scratch is having server issues');
+            }
         });
         
         // Handle Errors
