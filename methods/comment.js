@@ -1,5 +1,5 @@
 // Post comments to user profiles
-const http = require('http');
+const axios = require('axios');
 const fs = require('fs');
 
 // Fetch authentithication stuff
@@ -8,13 +8,12 @@ const cookieAuth = JSON.parse(fs.readFileSync('../methods/cookies.json'));
 // Export method
 module.exports = {
     comment(user, body) {
-
         // Set request content
-        let content = {
+        let content = JSON.stringify({
             'content': body,
             'parent_id': '',
             'commentee_id': ''
-        };
+        });
 
         // Configure headers
         let head = {
@@ -37,8 +36,14 @@ module.exports = {
             method: 'POST',
             host: 'scratch.mit.edu',
             path: '/site-api/comments/user/' + user + '/add/',
-            headers: head
+            headers: head,
+            data: content
         };
 
+        axios.post('/user', options).then(function (response) {
+            console.log(response);
+          }).catch(function (error) {
+            console.log(error);
+          });
     }
 }

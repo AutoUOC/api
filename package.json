@@ -14,6 +14,8 @@
   },
   "homepage": "https://github.com/BreMea/autouoc-api#readme",
   "dependencies": {
-    "http": "0.0.1-security"
+    "axios": "^0.20.0",
+    "http": "0.0.1-security",
+    "https": "^1.0.0"
   }
 }
