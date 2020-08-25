@@ -5,17 +5,16 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/BreMea/autouoc-api.git"
+    "url": "git+https://github.com/AutoUOC/autouoc-api.git"
   },
   "author": "bremea",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/BreMea/autouoc-api/issues"
+    "url": "https://github.com/AutoUOC/autouoc-api/issues"
   },
-  "homepage": "https://github.com/BreMea/autouoc-api#readme",
+  "homepage": "https://github.com/AutoUOC/autouoc-api#readme",
   "dependencies": {
     "axios": "^0.20.0",
-    "http": "0.0.1-security",
     "https": "^1.0.0",
     "scratch-api": "^1.1.11"
   }
