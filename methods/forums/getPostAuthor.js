@@ -10,7 +10,7 @@ const cookieAuth = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../auth/c
 // Export method
 module.exports = {
     async getPostAuthor(topicID, postNum) { 
-    const response = await fetch("https://scratch.mit.edu/discuss/topic/" + topicID + "/?page=" + (Math.floor(postNum / 10)+1))
+    const response = await fetch("https://scratch.mit.edu/discuss/topic/" + topicID + "/?page=" + (Math.floor(postNum / 20)+1))
     if (response.status === 403) {
             return {
                 'code': response.status,
