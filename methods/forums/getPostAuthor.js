@@ -28,7 +28,7 @@ module.exports = {
             return {
                 'code': response.status,
                 'msg': 'Got author of post number ' + postNum + " from topic " + topicID,
-                'data': pageHTML.split('<a class="black username" href="/users/')[(postNum % 10)+1].split('/"')[0]
+                'data': pageHTML.split('<a class="black username" href="/users/')[(postNum % 20)+1].split('/"')[0]
             };
         }
     }
