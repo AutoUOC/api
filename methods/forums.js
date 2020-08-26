@@ -100,6 +100,7 @@ module.exports = {
         };
 
         // Prepare POST data
+        var req = https.request(options, (res) => {
             if (res.statusCode === 403) {
                 return {
                     'code': res.statusCode,
