@@ -152,8 +152,9 @@ module.exports = {
                     'code': response.status,
                     'msg': 'Got post number ' + postNum + " from topic " + topicID,
                     'data': pageHTML.split('<div class="post_body_html">')[(postNum%10)+1].split('</div>')[0]
-            };
-    },
+                };
+            }
+        },
         async getPostAuthor(topicID, postNum) { 
         const response = await fetch("https://scratch.mit.edu/discuss/topic/" + topicID + "/?page=" + (Math.floor(postNum / 10)+1))
         if (response.status === 403) {
@@ -174,7 +175,31 @@ module.exports = {
                     'code': response.status,
                     'msg': 'Got author of post number ' + postNum + " from topic " + topicID,
                     'data': pageHTML.split('<a class="black username" href="/users/')[(postNum % 10)+1].split('/"')[0]
+                };
             }
-    },
+        },
+        async getTopicTitle(topicID) { 
+        const response = await fetch("https://scratch.mit.edu/discuss/topic/" + topicID)
+        if (response.status === 403) {
+                return {
+                    'code': response.status,
+                    'error-msg': 'Invalid auth',
+                    'data': 'none'
+                };
+            } else if (res.status === 500) {
+                return {
+                    'code': response.status,
+                    'error-msg': 'Server issues',
+                    'data': 'none'
+                };
+            } else {
+                const pageHTML = await response.text();
+                return {
+                    'code': response.status,
+                    'msg': 'Got title of topic ' + topicID,
+                    'data': pageHTML.split('<title>')[1].split('</title>')[0]
+                };
+            }
+        }
         
 }
