@@ -16,6 +16,7 @@
   "dependencies": {
     "axios": "^0.20.0",
     "https": "^1.0.0",
-    "scratch-api": "^1.1.11"
+    "scratch-api": "^1.1.11",
+    "node-fetch": "^2.6.0"
   }
 }
