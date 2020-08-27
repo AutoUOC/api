@@ -1,10 +1,24 @@
 module.exports = {
     // Comment methods
-    comments: require('./methods/comments/comments.js'),
+    comments: {
+		post: require('./methods/comments/post.js').post,
+		reply: require('./methods/comments/reply.js').reply
+	},
     
     // Forum methods
-    forums: require('./methods/forums/forums.js'),
+    forums: {
+		post: require('./methods/forums/post.js').post,
+		edit: require('./methods/forums/edit.js').edit,
+		follow: require('./methods/forums/followTopic.js').followTopic,
+		unfollow: require('./methods/forums/unfollowTopic.js').unfollowTopic,
+		getTitle: require('./methods/forums/getPostTitle.js').getTopicTitle,
+		getContent: require('./methods/forums/getPostContent.js').getPostContent,
+		getAuthor: require('./methods/forums/getPostAuthor.js').getPostAuthor,
+		getNew: require('./methods/forums/getNew.js').getNewPosts,
+	},
 
     // Messages methods
-    messages: require('./methods/messages/messages.js')
+    messages: {
+		count: require('./methods/messages/count.js').count
+	}
 }

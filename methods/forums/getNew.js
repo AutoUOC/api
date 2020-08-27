@@ -6,7 +6,7 @@ const path = require('path');
 const fetch = require("node-fetch");
 
 // Fetch authentithication stuff
-const cookieAuth = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../auth/cookies.json')));
+const cookieAuth = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../../auth/cookies.json')));
 
 
 module.exports = {

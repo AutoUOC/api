@@ -5,13 +5,13 @@ const path = require('path');
 const fetch = require("node-fetch");
 
 // Fetch authentithication stuff
-const cookieAuth = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../auth/cookies.json')));
+const cookieAuth = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../../auth/cookies.json')));
 
 // Export method
 module.exports = {
     async getTopicTitle(topicID) { 
-    const response = await fetch("https://scratch.mit.edu/discuss/topic/" + topicID)
-    if (response.status === 403) {
+		const response = await fetch("https://scratch.mit.edu/discuss/topic/" + topicID)
+		if (response.status === 403) {
             return {
                 'code': response.status,
                 'error-msg': 'Invalid auth',

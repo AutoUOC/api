@@ -1,10 +1,10 @@
-// Post comments to user profiles
+// Gets message count
 const https = require('https');
 const fs = require('fs');
 const path = require('path');
 
 // Fetch authentithication stuff
-const cookieAuth = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../auth/cookies.json')));
+const cookieAuth = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../../auth/cookies.json')));
 
 // Export method
 module.exports = {
