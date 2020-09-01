@@ -11,7 +11,7 @@ module.exports = {
 		edit: require('./methods/forums/edit.js').edit,
 		follow: require('./methods/forums/followTopic.js').followTopic,
 		unfollow: require('./methods/forums/unfollowTopic.js').unfollowTopic,
-		getTitle: require('./methods/forums/getPostTitle.js').getTopicTitle,
+		getTitle: require('./methods/forums/getTopicTitle.js').getTopicTitle,
 		getContent: require('./methods/forums/getPostContent.js').getPostContent,
 		getAuthor: require('./methods/forums/getPostAuthor.js').getPostAuthor,
 		getNew: require('./methods/forums/getNew.js').getNewPosts,
