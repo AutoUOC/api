@@ -3,40 +3,33 @@ const https = require('https');
 const fs = require('fs');
 const path = require('path');
 
-// Fetch authentithication stuff
-const cookieAuth = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../../auth/cookies.json')));
-
 // Export method
 module.exports = {
-    post(user, body) {
+    vote(botid) {
         // Set request content
-        let content = JSON.stringify({
-            'content': body,
-            'parent_id': '',
-            'commentee_id': ''
-        });
+        let content = '';
 
         // Configure headers
         let head = {
-            'Referer': 'https://scratch.mit.edu/users/' + user,
+            'Referer': 'https://bots.discordlabs.org/bot/' + botid,
             'Connection': 'keep-alive',
-            'Origin': 'https://scratch.mit.edu',
-            'Content-Length': content.length,
-            'X-Requested-With': 'XMLHttpRequest',
-            'Content-Type': 'application/json',
+            'Origin': 'https://bots.discordlabs.org',
+            'Content-Length': '0',
+            'Content-Type': 'application/x-www-form-urlencoded',
             'Accept-Encoding': 'gzip, deflate, br',
             'Accept-Language': 'en-US,en;q=0.5',
-            'Accept': 'text/html, */*; q=0.01',
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:79.0) Gecko/20100101 Firefox/79.0',
-            'X-CSRFToken': 'a',
-            'Cookie': cookieAuth.cookie
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:80.0) Gecko/20100101 Firefox/80.0',
+            'DNT': '1',
+            'Upgrade-Insecure-Requests': '1',
+            'Cookie': 'removed cuz idk if it can be used against me'
         };
 
         // Configure HTTP options
         let options = {
             method: 'POST',
-            host: 'scratch.mit.edu',
-            path: '/site-api/comments/user/' + user + '/add/',
+            host: 'bots.discordlabs.org',
+            path: '/bot/' + botid + '/vote',
             headers: head
         };
 
@@ -57,7 +50,7 @@ module.exports = {
             } else {
                 return {
                     'code': res.statusCode,
-                    'msg': 'Comment posted to ' + user + '\'s profile.',
+                    'msg': 'Voted',
                     'data': 'none'
                 };
             }
@@ -65,7 +58,7 @@ module.exports = {
         
         // Handle Errors
         req.on('error', (e) => {
-            console.error('API Error: ' + e);
+            console.error('Error: ' + e);
         });
         
         // Send content and end request

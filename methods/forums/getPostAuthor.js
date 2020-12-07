@@ -10,21 +10,22 @@ const cookieAuth = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../../aut
 // Export method
 module.exports = {
     async getPostAuthor(topicID, postNum) { 
-    const response = await fetch("https://scratch.mit.edu/discuss/topic/" + topicID + "/?page=" + (Math.floor(postNum / 20)+1))
+    const response = await fetch("https://scratch.mit.edu/discuss/topic/" + topicID + "/?page=" + (Math.floor(postNum / 20) + 1));
     if (response.status === 403) {
             return {
                 'code': response.status,
                 'error-msg': 'Invalid auth',
                 'data': 'none'
             };
-        } else if (res.status === 500) {
+        } else if (response.status === 500) {
             return {
                 'code': response.status,
                 'error-msg': 'Server issues',
                 'data': 'none'
             };
         } else {
-            const pageHTML = await response.text();
+            const pageHTML = async () => {await response.text();}
+            console.log(pageHTML.split('<a class="black username" href="/users/')[(postNum % 20)+1].split('/"')[0]);
             return {
                 'code': response.status,
                 'msg': 'Got author of post number ' + postNum + " from topic " + topicID,

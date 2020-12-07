@@ -41,18 +41,26 @@ module.exports = {
         // Prepare POST data
         var req = https.request(options, (res) => {
             if (res.statusCode === 403) {
+                req.end();
                 return {
                     'code': res.statusCode,
                     'error-msg': 'Invalid auth',
                     'data': 'none'
                 };
             } else if (res.statusCode === 500) {
+                req.end();
                 return {
                     'code': res.statusCode,
                     'error-msg': 'Server issues',
                     'data': 'none'
                 };
+            } else if (res.statusCode === 200) {
+                setTimeout(function() {
+                    req.write(content);
+                    req.end();
+                }, 121000);
             } else {
+                req.end();
                 return {
                     'code': res.statusCode,
                     'msg': 'Posted to topic ' + topicID,
@@ -68,6 +76,6 @@ module.exports = {
         
         // Send content and end request
         req.write(content);
-        req.end();
+        
     }
 }
